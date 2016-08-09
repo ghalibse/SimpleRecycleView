@@ -1,10 +1,14 @@
 package com.example.simplerecycleview;
 
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -13,7 +17,9 @@ import java.util.ArrayList;
  */
 public class LibuAdapter extends RecyclerView.Adapter<LibuAdapter.ViewHolder> {
 
+    private static final String TAG = "LibuAdapterTAG_";
     private ArrayList<String> mStrings;
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,11 +47,19 @@ public class LibuAdapter extends RecyclerView.Adapter<LibuAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(LibuAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final LibuAdapter.ViewHolder holder, int position) {
 
-        String string = mStrings.get(position);
+        final String string = mStrings.get(position);
         TextView textView = holder.textViewName;
         textView.setText(string);
+
+        holder.textViewName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Snackbar.make(holder.itemView,"HELLO : " + string,Snackbar.LENGTH_LONG).show();
+            }
+        });
 
     }
 
